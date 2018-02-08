@@ -1,0 +1,213 @@
+C51 COMPILER V9.57.0.0   MAIN                                                              02/08/2018 16:46:15 PAGE 1   
+
+
+C51 COMPILER V9.57.0.0, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN .\Objects\main.obj
+COMPILER INVOKED BY: E:\C51\BIN\C51.EXE main.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listings\main.lst) TA
+                    -BS(2) OBJECT(.\Objects\main.obj)
+
+line level    source
+
+   1          #include <reg52.h>
+   2          
+   3          void delay(unsigned int t)
+   4          {
+   5   1        while(--t);
+   6   1      }
+   7          
+   8            sbit lineBottom = P2^5;
+   9            sbit lineCenter = P2^4;
+  10            sbit lineTop = P2^3;
+  11            
+  12            sbit columnLeft1 = P0^1;
+  13            sbit columnLeft2 = P0^2;
+  14            sbit columnLeft3 = P0^3;
+  15            sbit columnCenter1 = P0^4;
+  16            sbit columnCenter2 = P0^5;
+  17            sbit columnCenter3 = P0^6;
+  18            sbit columnRight1 = P0^7;
+  19            sbit columnRight2 = P2^7;
+  20            sbit columnRight3 = P2^6;
+  21          
+  22          void onAllLed(void);
+  23          void offAllLed(void);
+  24          void stepLinesLed(int steps);
+  25          void stepColumnsLed(int steps);
+  26          void stepDiagonaleLed(int steps);
+  27          void reverseStepLinesLed(int steps);
+  28          void main(void)
+  29          {
+  30   1      stepLinesLed(2);
+  31   1      reverseStepLinesLed(2);
+  32   1      stepColumnsLed(2);
+  33   1      stepDiagonaleLed(2);
+  34   1      }
+  35          
+  36          void stepLinesLed(int steps)
+  37          { 
+  38   1        onAllLed();
+  39   1        
+  40   1        while(steps--){
+  41   2        lineBottom = 0;
+  42   2        delay(50000);
+  43   2        lineBottom = 1;
+  44   2        
+  45   2        lineCenter = 0;
+  46   2        delay(50000);
+  47   2        lineCenter = 1;
+  48   2        
+  49   2        lineTop = 0;
+  50   2        delay(50000);
+  51   2        lineTop = 1;
+  52   2        }
+  53   1        
+  54   1        offAllLed();
+C51 COMPILER V9.57.0.0   MAIN                                                              02/08/2018 16:46:15 PAGE 2   
+
+  55   1      }
+  56          
+  57          void reverseStepLinesLed(int steps)
+  58          {
+  59   1        onAllLed();
+  60   1        
+  61   1        while(steps--){
+  62   2        
+  63   2        lineTop = 0;
+  64   2        delay(50000);
+  65   2        lineTop = 1;
+  66   2          
+  67   2        lineCenter = 0;
+  68   2        delay(50000);
+  69   2        lineCenter = 1;
+  70   2        
+  71   2        lineBottom = 0;
+  72   2        delay(50000);
+  73   2        lineBottom = 1;
+  74   2        }
+  75   1        
+  76   1        offAllLed();
+  77   1      }
+  78          
+  79          void stepDiagonaleLed(int steps)
+  80          {
+  81   1        while(steps--){
+  82   2        lineBottom = 0;
+  83   2        columnLeft1 = 1;
+  84   2        columnLeft2 = 1;
+  85   2        columnLeft3 = 1;
+  86   2        
+  87   2        delay(50000);
+  88   2        
+  89   2        lineBottom = 1;
+  90   2        columnLeft1 = 0;
+  91   2        columnLeft2 = 0;
+  92   2        columnLeft3 = 0;
+  93   2        
+  94   2        lineCenter = 0;
+  95   2        columnCenter1 = 1;
+  96   2        columnCenter2 = 1;
+  97   2        columnCenter3 = 1;
+  98   2        
+  99   2        delay(50000);
+ 100   2        
+ 101   2        lineCenter = 1;
+ 102   2        columnCenter1 = 0;
+ 103   2        columnCenter2 = 0;
+ 104   2        columnCenter3 = 0;
+ 105   2        
+ 106   2        lineTop = 0;
+ 107   2        columnRight1 = 1;
+ 108   2        columnRight2 = 1;
+ 109   2        columnRight3 = 1;
+ 110   2        
+ 111   2        delay(50000);
+ 112   2        
+ 113   2        lineTop = 1;
+ 114   2        columnRight1 = 0;
+ 115   2        columnRight2 = 0;
+ 116   2        columnRight3 = 0;
+C51 COMPILER V9.57.0.0   MAIN                                                              02/08/2018 16:46:15 PAGE 3   
+
+ 117   2        }
+ 118   1      }
+ 119          void stepColumnsLed(int steps)
+ 120          {
+ 121   1        lineTop = 0;
+ 122   1        lineCenter = 0;
+ 123   1        lineBottom = 0;
+ 124   1        
+ 125   1        while(steps--){
+ 126   2        columnLeft1 = 1;
+ 127   2        columnLeft2 = 1;
+ 128   2        columnLeft3 = 1;
+ 129   2        delay(50000);
+ 130   2        columnLeft1 = 0;
+ 131   2        columnLeft2 = 0;
+ 132   2        columnLeft3 = 0;
+ 133   2          
+ 134   2        columnCenter1 = 1;
+ 135   2        columnCenter2 = 1;
+ 136   2        columnCenter3 = 1;
+ 137   2        delay(50000);
+ 138   2        columnCenter1 = 0;
+ 139   2        columnCenter2 = 0;
+ 140   2        columnCenter3 = 0;
+ 141   2          
+ 142   2        columnRight1 = 1;
+ 143   2        columnRight2 = 1;
+ 144   2        columnRight3 = 1;
+ 145   2        delay(50000);
+ 146   2        columnRight1 = 0;
+ 147   2        columnRight2 = 0;
+ 148   2        columnRight3 = 0;
+ 149   2        }
+ 150   1        
+ 151   1        lineTop = 1;
+ 152   1        lineCenter = 1;
+ 153   1        lineBottom = 1;
+ 154   1      }
+ 155          
+ 156          void onAllLed(void)
+ 157          {
+ 158   1        columnLeft1 = 1;
+ 159   1        columnLeft2 = 1;
+ 160   1        columnLeft3 = 1;
+ 161   1        columnCenter1 = 1;
+ 162   1        columnCenter2 = 1;
+ 163   1        columnCenter3 = 1;
+ 164   1        columnRight1 = 1;
+ 165   1        columnRight2 = 1;
+ 166   1        columnRight3 = 1;
+ 167   1      }
+ 168          
+ 169          void offAllLed(void)
+ 170          {
+ 171   1        columnLeft1 = 0;
+ 172   1        columnLeft2 = 0;
+ 173   1        columnLeft3 = 0;
+ 174   1        columnCenter1 = 0;
+ 175   1        columnCenter2 = 0;
+ 176   1        columnCenter3 = 0;
+ 177   1        columnRight1 = 0;
+ 178   1        columnRight2 = 0;
+C51 COMPILER V9.57.0.0   MAIN                                                              02/08/2018 16:46:15 PAGE 4   
+
+ 179   1        columnRight3 = 0;
+ 180   1      }
+ 181          
+ 182          
+ 183          
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    314    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----       4
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)
